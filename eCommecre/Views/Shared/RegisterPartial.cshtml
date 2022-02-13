@@ -1,0 +1,50 @@
+﻿@model eCommecre.Models.RegisterModel
+
+<form asp-controller="UserAuth" asp-action="Register" id="register">
+    <input type="hidden" asp-for="RegisterInValid" />
+    <div class="form-group">
+        <label for="singin-email" asp-for="Email">@*Username or email address **@</label>
+        <input type="text" asp-for="Email" class="form-control" name="Email">
+        <span asp-validation-for="Email"></span>
+        <span class="text-danger">@ViewData["eEmail"]</span>
+    </div><!-- End .form-group -->
+    <div class="form-group">
+        <label for="singin-password" asp-for="UserName">@*Password **@</label>
+        <input asp-for="UserName" class="form-control" name="UserName">
+        <span asp-validation-for="UserName"></span>
+        <span class="text-danger">@ViewData["eUserName"]</span>
+    </div><!-- End .form-group -->
+    <div class="form-group">
+        <label for="singin-password" asp-for="Password">@*Password **@</label>
+        <input type="password" asp-for="Password" class="form-control" name="Password">
+        <span asp-validation-for="Password"></span>
+    </div><!-- End .form-group -->
+    <div class="form-group">
+        <label for="singin-password" asp-for="ConfirmPassword">@*Password **@</label>
+        <input type="password" asp-for="ConfirmPassword" class="form-control" name="ConfirmPassword">
+        <span asp-validation-for="ConfirmPassword"></span>
+    </div><!-- End .form-group -->
+    <div class="form-footer">
+        <button type="button" id="btnRegister" name="btnRegister" class="btn btn-outline-primary-2">
+            <span>ĐĂNG KÝ</span>
+            <i class="icon-long-arrow-right"></i>
+        </button>
+    </div><!-- End .form-footer -->
+</form>
+    <!--<div class="form-choice">
+        <p class="text-center">or sign in with</p>
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="#" class="btn btn-login btn-g">
+                    <i class="icon-google"></i>
+                    Login With Google
+                </a>
+            </div>--><!-- End .col-6 -->
+            <!--<div class="col-sm-6">
+                <a href="#" class="btn btn-login  btn-f">
+                    <i class="icon-facebook-f"></i>
+                    Login With Facebook
+                </a>
+            </div>--><!-- End .col-6 -->
+        <!--</div>--><!-- End .row -->
+    <!--</div>--><!-- End .form-choice -->

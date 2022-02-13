@@ -1,0 +1,113 @@
+﻿
+<style>
+    .c {
+        width: 150px;
+    }
+</style>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Users</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Product">Product</a></li>
+                        <li class="breadcrumb-item active"></li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <a class="btn btn-success btn-xs" onclick="showModal(-1)">Thêm<i title="Thêm" class="nav-icon fas fa-plus"></i></a>
+                            <br /><br />
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Hình</th>
+                                        <th>Tên</th>
+                                        <th>Số điện thoại</th>
+                                        <th class="c">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in ViewBag.list)
+                                    {
+                                        <tr>
+                                            <td><img style="width:60px;height:60px;" src="~/Admin/dist/img/user-img/@item.UrlImg"/></td>
+                                            <td>@item.Name</td>
+                                            <td>@item.PhoneNumber</td>
+
+                                            <td>
+                                                <a class="btn btn-info btn-xs" onclick="showModal(@item.Id)">Cập nhật <i title="Cập nhật" class="nav-icon fas fa-edit"></i></a>
+                                                <a class="btn btn-danger btn-xs" onclick="showModalDelete(@item.Id)">Xóa <i title="Xóa" class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="formCreate">
+                    <partial name="Create" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalDelete" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có muốn xóa không ?</p>
+                <input id="IdDelete" hidden />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+                <button type="button" name="btnSave" class="btn btn-primary">Có</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/Admin/dist/js/users.js" asp-append-version="true"></script>
+}

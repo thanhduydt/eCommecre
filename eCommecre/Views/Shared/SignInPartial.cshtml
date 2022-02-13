@@ -1,0 +1,48 @@
+﻿@model eCommecre.Models.LoginModel
+<div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
+    <form id="UserLoginForm" asp-controller="UserAuth" asp-action="Login">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="LoginInValid" />
+        <div class="form-group">
+            <label for="singin-email" asp-for="Email">@*Username or email address **@</label>
+            <input asp-for="Email" class="form-control" >
+            <span asp-validation-for="Email"></span>
+        </div><!-- End .form-group -->
+
+        <div class="form-group">
+            <label for="singin-password" asp-for="Password">@*Password **@</label>
+            <input  asp-for="Password"  class="form-control" >
+            <span asp-validation-for="Password"></span>
+        </div><!-- End .form-group -->
+
+        <div class="form-footer">
+            <button type="button" id="login" name="login" class="btn btn-outline-primary-2">
+                <span>ĐĂNG NHẬP</span>
+                <i class="icon-long-arrow-right"></i>
+            </button>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" asp-for="RememberMe" class="custom-control-input">
+                <label class="custom-control-label" asp-for="RememberMe">@*Remember*@ Me</label>
+            </div><!-- End .custom-checkbox -->
+
+            @*<a href="#" class="forgot-link">Forgot Your Password?</a>*@
+        </div><!-- End .form-footer -->
+    </form>
+    <!--<div class="form-choice">
+        <p class="text-center">or sign in with</p>
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="#" class="btn btn-login btn-g">
+                    <i class="icon-google"></i>
+                    Login With Google
+                </a>
+            </div>--><!-- End .col-6 -->
+            <!--<div class="col-sm-6">
+                <a href="#" class="btn btn-login btn-f">
+                    <i class="icon-facebook-f"></i>
+                    Login With Facebook
+                </a>
+            </div>--><!-- End .col-6 -->
+        <!--</div>--><!-- End .row -->
+    <!--</div>--><!-- End .form-choice -->
+</div>

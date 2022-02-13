@@ -1,0 +1,37 @@
+﻿@model eCommecre.Areas.Admin.Models.CategoryModel
+<form id="edit" asp-area="Admin" asp-controller="Category" asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @if (ViewBag.error != null)
+    {
+        <input hidden name="error" value="@ViewBag.error" />
+    }
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group wow fadeInUp" data-wow-delay="100ms">
+                <label>Tên</label>
+                <input asp-for="Name" class="form-control">
+                <input asp-for="Id" hidden/>
+                <input name="error" hidden />
+                <span asp-validation-for="Name" class="text-danger"></span>
+                @if (ViewBag.eName != null)
+                {
+                    <div>
+                        <span class="text-danger">@ViewBag.eName</span>
+                    </div>
+                    <br />
+                }
+            </div>
+        </div>
+
+        <div class="col-12 text-center wow fadeInUp" data-wow-delay="500ms">
+            <button type="button" id="btnEdit" style="width:150px" class="btn btn-primary">Cập nhật</button>
+        </div>
+    </div>
+</form>
+<!-- /.content -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+    </script>
+}

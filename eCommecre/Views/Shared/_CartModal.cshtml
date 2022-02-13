@@ -1,0 +1,41 @@
+﻿<div id="cartModal" class="dropdown-menu dropdown-menu-right">
+    <div class="dropdown-cart-products">
+    @foreach(var item in ViewBag.Cart)
+    {
+        <div class="product">
+            <div class="product-cart-details">
+                <h4 class="product-title">
+                    <a asp-action="Product" asp-route-id="@item.ProductViewModel.Product.Id">@item.ProductViewModel.Product.Name</a>
+                </h4>
+
+                <span class="cart-product-info">
+                    <span class="cart-product-qty">@item.Quantity</span> x 
+                     @item.ProductViewModel.Product.Price
+                </span>
+            </div><!-- End .product-cart-details -->
+
+            <figure class="product-image-container">
+                <a asp-action="Product" class="product-image">
+                    <img src="~/Admin/dist/img/product/@item.ProductViewModel.ListImg[0].Url" alt="product">
+                </a>
+            </figure>
+            <a href="#" class="btn-remove" onclick="RemoveProductFromCart(@item.ProductViewModel.Product.Id)"><i class="icon-close"></i></a>
+        </div><!-- End .product -->
+    }
+
+
+    </div><!-- End .cart-product -->
+
+    <div class="dropdown-cart-total">
+        <span>Tổng tiền</span>
+
+        <span class="cart-total-price">
+            @ViewBag.Total
+      </span>
+    </div><!-- End .dropdown-cart-total -->
+
+    <div class="dropdown-cart-action">
+        <a asp-action="ViewCart" class="btn btn-primary">Xem giỏ hàng</a>
+        <a asp-action="Checkout" class="btn btn-outline-primary-2"><span>Đặt hàng</span><i class="icon-long-arrow-right"></i></a>
+    </div><!-- End .dropdown-cart-total -->
+</div><!-- End .dropdown-menu -->

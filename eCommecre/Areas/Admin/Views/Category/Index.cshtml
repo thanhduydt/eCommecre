@@ -1,0 +1,118 @@
+﻿
+<style>
+    .c {
+        width: 150px;
+    }
+</style>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Category</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a>Category</a></li>
+                        <li class="breadcrumb-item active"></li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <a class="btn btn-success btn-xs" id="createModal">Thêm<i title="Thêm" class="nav-icon fas fa-plus"></i></a>
+                            <br /><br />
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Tên</th>
+                                        <th class="c">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in ViewBag.list)
+                                    {
+                                        <tr>
+
+                                            <td>@item.Id</td>
+                                            <td>@item.Name</td>
+
+                                            <td>
+                                                <a class="btn btn-info btn-xs" onclick="GetCategory(@item.Id)">Cập nhật <i title="Cập nhật" class="nav-icon fas fa-edit"></i></a>
+                                                <a class="btn btn-danger btn-xs" asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Bạn có muốn xóa không?');">Xóa <i title="Xóa" class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm loại sản phẩm mới</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="formCreate">
+                    <partial name="CreatePartial" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm loại sản phẩm mới</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="formEdit">
+                    <partial name="Edit" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $("#createModal").click(modalCreate);
+        function modalCreate() {
+            $("#modalCreate").modal('show');
+        }
+    </script>
+<script src="~/Admin/dist/js/category.js" asp-append-version="true"></script>
+}

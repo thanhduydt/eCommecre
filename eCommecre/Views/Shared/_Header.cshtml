@@ -1,0 +1,153 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using eCommecre.Areas.Admin.Models
+
+@inject SignInManager<UserModel> SignInManager
+@inject UserManager<UserModel> UserManager
+<header class="header header-intro-clearance header-4">
+    <div class="header-middle">
+        <div class="container">
+            <div class="header-left">
+                <button class="mobile-menu-toggler">
+                    <span class="sr-only">Toggle mobile menu</span>
+                    <i class="icon-bars"></i>
+                </button>
+
+                <a href="index.html" class="logo">
+                    <img src="~/img/logo.png" alt="Molla Logo" width="105" height="25">
+                </a>
+            </div><!-- End .header-left -->
+
+            <div class="header-center">
+                <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+                    <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                    <form action="#" method="get">
+                        <div class="header-search-wrapper search-wrapper-wide">
+                            <label for="q" class="sr-only">Search</label>
+                            <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                            <input type="search" class="form-control" name="q" id="q" placeholder="Bạn tìm gì ..." required>
+                        </div><!-- End .header-search-wrapper -->
+                    </form>
+                </div><!-- End .header-search -->
+            </div>
+
+            <div class="header-right">
+
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                        </li>
+                        <li class="nav-item">
+                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <a href="#UserLoginModal" data-toggle="modal">Đăng nhập</a>
+                }
+
+                <!--<div class="dropdown compare-dropdown">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Compare Products" aria-label="Compare Products">
+                        <div class="icon">
+                            <i class="icon-random"></i>
+                        </div>
+                        <p>Compare</p>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="compare-products">
+                            <li class="compare-product">
+                                <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                <h4 class="compare-product-title"><a asp-action="Product">Blue Night Dress</a></h4>
+                            </li>
+                            <li class="compare-product">
+                                <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                <h4 class="compare-product-title"><a asp-action="Product">White Long Skirt</a></h4>
+                            </li>
+                        </ul>
+
+                        <div class="compare-actions">
+                            <a href="#" class="action-link">Clear All</a>
+                            <a href="#" class="btn btn-outline-primary-2"><span>Compare</span><i class="icon-long-arrow-right"></i></a>
+                        </div>
+                    </div>--><!-- End .dropdown-menu -->
+                <!--</div>--><!-- End .compare-dropdown -->
+
+                <div class="dropdown cart-dropdown">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                        <div class="icon">
+                            <i class="icon-shopping-cart"></i>
+                            <span class="cart-count"></span>
+                        </div>
+                        <p>Giỏ hàng</p>
+                    </a>
+                    <partial name="_CartModal" />
+                </div><!-- End .cart-dropdown -->
+            </div><!-- End .header-right -->
+        </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+
+    <div class="header-bottom sticky-header">
+        <div class="container">
+            <!--<div class="header-left">
+                <div class="dropdown category-dropdown">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
+                        Browse Categories <i class="icon-angle-down"></i>
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <nav class="side-nav">
+                            <ul class="menu-vertical sf-arrows">
+                                <li class="item-lead"><a href="#">Daily offers</a></li>
+                                <li class="item-lead"><a href="#">Gift Ideas</a></li>
+                                <li><a href="#">Beds</a></li>
+                                <li><a href="#">Lighting</a></li>
+                                <li><a href="#">Sofas & Sleeper sofas</a></li>
+                                <li><a href="#">Storage</a></li>
+                                <li><a href="#">Armchairs & Chaises</a></li>
+                                <li><a href="#">Decoration </a></li>
+                                <li><a href="#">Kitchen Cabinets</a></li>
+                                <li><a href="#">Coffee & Tables</a></li>
+                                <li><a href="#">Outdoor Furniture </a></li>
+                            </ul>-->
+            <!-- End .menu-vertical -->
+            <!--</nav>--><!-- End .side-nav -->
+            <!--</div>--><!-- End .dropdown-menu -->
+            <!--</div>--><!-- End .category-dropdown -->
+            <!--</div>--><!-- End .header-left -->
+
+            <div class="header-center">
+                <nav class="main-nav">
+                    <ul class="menu sf-arrows">
+                        <li class="megamenu-container @*active*@">
+                            <a asp-action="Category">Điện thoại</a>
+                        </li>
+                        <li>
+                            <a asp-action="Category">Table</a>
+
+                        </li>
+                        <li>
+                            <a asp-action="Category">Laptop</a>
+                        </li>
+                        <li>
+                            <a href="blog.html" class="sf-with-ul">Phụ kiện</a>
+
+                            <ul>
+                                <li><a href="blog.html">Loa</a></li>
+                                <li><a href="blog-listing.html">Sạc</a></li>
+                            </ul>
+                        </li>
+                    </ul><!-- End .menu -->
+                </nav><!-- End .main-nav -->
+            </div><!-- End .header-center -->
+            @*<div class="header-right">
+                    <i class="la la-lightbulb-o"></i><p>Clearance<span class="highlight">&nbsp;Up to 30% Off</span></p>
+                </div>*@
+        </div><!-- End .container -->
+    </div><!-- End .header-bottom -->
+</header><!-- End .header -->

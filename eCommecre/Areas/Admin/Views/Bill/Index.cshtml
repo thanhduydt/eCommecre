@@ -1,0 +1,128 @@
+﻿@model IEnumerable<eCommecre.Areas.Admin.Models.Bill>
+<style>
+    .c {
+        width: 150px;
+    }
+</style>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Bill</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a>Bill</a></li>
+                        <li class="breadcrumb-item active"></li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            @*<a class="btn btn-success btn-xs" id="createModal">Thêm<i title="Thêm" class="nav-icon fas fa-plus"></i></a>
+                            <br /><br />*@
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Người nhận</th>
+                                        <th>Thời gian</th>
+                                        <th>Trạng thái</th>
+                                        <th class="c">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td>@item.User.Name</td>
+                                            <td>@item.DateTime</td>
+                                            <th>
+                                                <select id="@item.Id" onchange="UpdateStatus(@item.Id)" asp-for="@item.Status" class="form-control">
+                                                    <option value="0">Đang xử lý</option>
+                                                    <option value="1">Xác nhận</option>
+                                                    <option value="2">Hoàn thành</option>
+                                                </select>
+                                            </th>
+                                            <td>
+                                                <a class="btn btn-info btn-xs" onclick="GetBill(@item.Id)">Xem chi tiết</a>
+                                                @*<a class="btn btn-danger btn-xs" asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Bạn có muốn xóa không?');">Xóa <i title="Xóa" class="fas fa-trash-alt"></i></a>*@
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="billDetail">
+                    <partial name="BillDetail" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function GetBill(id) {
+            $.ajax({
+                type: 'GET',
+                url: 'Bill/GetBill',
+                data: { id: id },
+                success: function (data) {
+                    console.log(data)
+                    $("#modal").modal('show');
+                    $('#billDetail').html(data);
+                }
+            });
+
+        }
+        function UpdateStatus(id) {
+            var status = $('#' + id).val();
+            $.ajax({
+                type: 'POST',
+                url: 'Bill/UpdateStatus',
+                data: { id: id, status: status },
+                success: function () {
+                    location.reload();
+                }
+            });
+        }
+    </script>
+    <script src="~/Admin/dist/js/category.js" asp-append-version="true"></script>
+}

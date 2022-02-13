@@ -1,0 +1,67 @@
+﻿@if (ViewBag.Bill != null)
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group wow fadeInUp" data-wow-delay="100ms">
+                <p>Người nhận: @ViewBag.Bill.User.Name</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group wow fadeInUp" data-wow-delay="100ms">
+                <p>Số điện thoại: @ViewBag.Bill.ReceivingPhoneNmber</p>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group wow fadeInUp" data-wow-delay="100ms">
+                    <p>Địa chỉ: @ViewBag.Bill.ReceivingAddress</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group wow fadeInUp" data-wow-delay="100ms">
+                    <p>Ngày đặt: @ViewBag.Bill.DateTime</p>
+                </div>
+            </div>
+        </div> 
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th >Số lượng</th>
+                        <th >Giá</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.ListProduct != null)
+                    {
+                        foreach (var item in ViewBag.ListProduct)
+                        {
+                           <tr>
+                                    <td >@item.Product.Name </td>
+                                    <td>
+                                        @item.Quantity
+                                    <td>
+                                    <td>
+                                        @item.Product.Price
+                                    </td>
+                                </tr>
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+<div class="row">
+    <h3 style="padding-left:250px;">Tổng tiền: @ViewBag.Bill.Total</h3>
+</div>
+}
+<!-- /.content -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+    </script>
+}

@@ -1,0 +1,82 @@
+﻿@model eCommecre.Areas.Admin.Models.ProductModel
+                        <!-- /.card-header -->
+<!-- form start -->
+<form id="create" asp-area="Admin" asp-controller="Category" asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @if (ViewBag.error != null)
+    {
+        <input hidden name="error" value="@ViewBag.error" />
+    }
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group wow fadeInUp" data-wow-delay="100ms">
+                <label>Tên</label>
+                <input asp-for="Id" hidden/>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+                @if (ViewBag.eName != null)
+                {
+                    <div>
+                        <span class="text-danger">@ViewBag.eName</span>
+                    </div>
+                    <br />
+                }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group wow fadeInUp" data-wow-delay="100ms">
+                <label>Giá nhập</label>
+                <input asp-for="ImportPrice" class="form-control">
+                <span asp-validation-for="ImportPrice" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group wow fadeInUp" data-wow-delay="100ms">
+                <label>Loại sản phẩm</label>
+                <select class="form-control" asp-for="IdCategory" asp-items="ViewBag.ListCategory" id="Category"></select>
+                    <span asp-validation-for="IdCategory" class="text-danger"></span>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group wow fadeInUp" data-wow-delay="100ms">
+                <label>Giá bán</label>
+                <input asp-for="Price" class="form-control">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group wow fadeInUp" data-wow-delay="100ms">
+                <label>Mô tả</label>
+                <input asp-for="Description" class="form-control">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="image-upload">
+                <label for="ful"> <a class="btn btn-success btn-xs">Thêm hình<i title="Thêm" class="nav-icon fas fa-plus"></i></a></label>
+                <input type="file" accept=".jpeg,.gif,.png,.tiff,.bmp,.jpg" class="custom-file-input" id="ful" name="ful">
+            </div>
+        </div>
+    </div>
+    <div id="listImg">
+    <partial name="ListImgPartial" />
+        </div>
+    <div class="col-12 text-center wow fadeInUp" data-wow-delay="500ms">
+        <button type="button" onclick="createOrUpdate()" style="width:150px" class="btn btn-primary">Lưu</button>
+    </div>
+
+</form>
+<!-- /.content -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+    </script>
+}
