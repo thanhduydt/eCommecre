@@ -42,7 +42,7 @@
 
                 }
                 else {
-                    location.href = 'Home/Index';
+                    location.reload();
 
                 }
             },

@@ -91,7 +91,7 @@ namespace eCommecre.Controllers
             var product = _context.Product.Find(id);
             foreach(var img in _context.Image.ToList())
             {
-                if(img.IdProduct==product.Id)
+                    if(img.IdProduct==product.Id)
                 {
                     listImg.Add(img);
                 }

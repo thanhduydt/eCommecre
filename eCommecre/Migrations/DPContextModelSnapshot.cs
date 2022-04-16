@@ -223,6 +223,34 @@ namespace eCommecre.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("eCommecre.Areas.Admin.Models.CommentModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdProduct")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdUser")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdProduct");
+
+                    b.HasIndex("IdUser");
+
+                    b.ToTable("Comment");
+                });
+
             modelBuilder.Entity("eCommecre.Areas.Admin.Models.ImageModel", b =>
                 {
                     b.Property<int>("Id")
@@ -271,6 +299,9 @@ namespace eCommecre.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameUnsigned")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
@@ -443,6 +474,23 @@ namespace eCommecre.Migrations
                     b.Navigation("Bill");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("eCommecre.Areas.Admin.Models.CommentModel", b =>
+                {
+                    b.HasOne("eCommecre.Areas.Admin.Models.ProductModel", "Product")
+                        .WithMany()
+                        .HasForeignKey("IdProduct")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCommecre.Areas.Admin.Models.UserModel", "User")
+                        .WithMany()
+                        .HasForeignKey("IdUser");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("eCommecre.Areas.Admin.Models.ImageModel", b =>
